@@ -138,7 +138,6 @@ class CPS extends PluginBase{
     /**
      * @param Player $player
      * @param int $action
-     * @param Position $pos
      *
      * Sets the action of the player.
      */
@@ -161,12 +160,15 @@ class CPS extends PluginBase{
 
         } else {
 
-            $current = $this->actions[$player->getLowerCaseName()]['current'];
+            $actions = $this->actions[$player->getLowerCaseName()];
+            $previous = $actions['current'];
 
-            $this->actions[$player->getLowerCaseName()]['previous'] = $current;
-            $this->actions[$player->getLowerCaseName()]['current'] = [
-                'action' => $action,
-                'time' => $time
+            $this->actions[$player->getLowerCaseName()] = [
+                'previous' => $previous,
+                'current' => [
+                    'action' => $action,
+                    'time' => $time
+                ]
             ];
         }
     }

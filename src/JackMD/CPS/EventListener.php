@@ -38,11 +38,12 @@ class EventListener implements Listener{
 
 		if($packet instanceof LoginPacket) {
 
-		    $name = $player->getLowerCaseName();
+		    $name = strtolower($packet->username);
 		    $input = (int)$packet->clientData["CurrentInputMode"];
 		    $this->plugin->setDeviceInput($name, $input);
 
 		} elseif ($packet instanceof LevelSoundEventPacket) {
+
 		    $sound = $packet->sound;
 		    if(in_array($sound, CPS::SWISH_SOUNDS)) {
 		        $this->plugin->addClick($player);
